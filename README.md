@@ -1,9 +1,17 @@
-# 1. Alphatraining
+# 1. AlphaTraining
 
-<!-- TOC -->autoauto- [1. Alphatraining](#1-alphatraining)auto    - [1.1. Git](#11-git)auto    - [1.2. Visual Studio Code](#12-visual-studio-code)autoauto<!-- /TOC -->
+<!-- TOC -->
 
-New repository to pratice on DeVops assets
-Training path to start this journey will be the following one:
+- [1. AlphaTraining](#1-alphatraining)
+  - [1.1. Introduction](#11-introduction)
+  - [1.2. Git](#12-git)
+  - [1.3. Visual Studio Code](#13-visual-studio-code)
+
+<!-- /TOC -->
+
+## 1.1. Introduction
+New repository to pratice on DevOps assets.
+The training path to start this journey will be the following one:
 
 * Git
 
@@ -25,13 +33,13 @@ Training path to start this journey will be the following one:
 
 * Artifactory
   
-## 1.1. Git
+## 1.2. Git
 
   Simple but nice quickstart to learn fast PR,branches, and other useful tips
   <https://guides.github.com/activities/hello-world/>
   Use VisualStudioCod plugins to interact easily with github repository
   
-## 1.2. Visual Studio Code
+## 1.3. Visual Studio Code
 
 ![alt text][logo]
 
