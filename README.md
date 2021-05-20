@@ -13,7 +13,7 @@
 AlphaTraining is a new repository to pratice on DevOps assets.
 The training path to start this journey will be the following one:
 
-- Git,JIRA
+- Git, JIRA
 
 - Visual Studio
 
