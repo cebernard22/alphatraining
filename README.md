@@ -13,7 +13,7 @@
 AlphaTraining is a new repository to pratice on DevOps assets.
 The training path to start this journey will be the following one:
 
-- Git,JIRA
+- Git, JIRA
 
 - Visual Studio
 
@@ -35,11 +35,11 @@ The training path to start this journey will be the following one:
   
 # 2. Git
 
-  Simple but nice quickstart to learn fast PR,branches, and other useful tips
+  Simple but nice quickstart to learn fast PR, branches, and other useful tips
   <https://guides.github.com/activities/hello-world/>
   Use VisualStudioCode plugins to interact easily with github repository
 
-  JIRA<->Github: Following project in use to monitor progress and run some quick prototypes:
+  JIRA<->Github: Following project is in use to monitor progress and run some quick prototypes:
   <https://alphatraining.atlassian.net/browse/BAC>
   
 # 3. Visual Studio Code
