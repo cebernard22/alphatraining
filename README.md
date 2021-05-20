@@ -39,7 +39,7 @@ The training path to start this journey will be the following one:
   <https://guides.github.com/activities/hello-world/>
   Use VisualStudioCode plugins to interact easily with github repository
 
-  JIRA<->Github: Following project in use to monitor progress and run some quick prototypes:
+  JIRA<->Github: Following project is in use to monitor progress and run some quick prototypes:
   <https://alphatraining.atlassian.net/browse/BAC>
   
 # 3. Visual Studio Code
