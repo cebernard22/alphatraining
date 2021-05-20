@@ -1,45 +1,48 @@
-# 1. AlphaTraining
+
 
 <!-- TOC -->
 
-- [1. AlphaTraining](#1-alphatraining)
-  - [1.1. Introduction](#11-introduction)
-  - [1.2. Git](#12-git)
-  - [1.3. Visual Studio Code](#13-visual-studio-code)
+- [1. Introduction](#1-introduction)
+- [2. Git](#2-git)
+- [3. Visual Studio Code](#3-visual-studio-code)
 
 <!-- /TOC -->
 
-## 1.1. Introduction
-New repository to pratice on DevOps assets.
+# 1. Introduction
+
+AlphaTraining is a new repository to pratice on DevOps assets.
 The training path to start this journey will be the following one:
 
-* Git
+- Git,JIRA
 
-* Visual Studio
+- Visual Studio
 
-* Docker
+- Docker
 
-* Kubernetes
+- Kubernetes
 
-* Terraform
+- Terraform
 
-* Helm
+- Helm
 
-* Ansible
+- Ansible
 
-* Packer
+- Packer
 
-* S3
+- S3
 
-* Artifactory
+- Artifactory
   
-## 1.2. Git
+# 2. Git
 
   Simple but nice quickstart to learn fast PR,branches, and other useful tips
   <https://guides.github.com/activities/hello-world/>
-  Use VisualStudioCod plugins to interact easily with github repository
+  Use VisualStudioCode plugins to interact easily with github repository
+
+  JIRA<->Github: Following project in use to monitor progress and run some quick prototypes:
+  <https://alphatraining.atlassian.net/browse/BAC>
   
-## 1.3. Visual Studio Code
+# 3. Visual Studio Code
 
 ![alt text][logo]
 
