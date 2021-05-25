@@ -5,6 +5,7 @@
 - [1. Introduction](#1-introduction)
 - [2. Git](#2-git)
 - [3. Visual Studio Code](#3-visual-studio-code)
+- [4. Kubernetes](#4-kubernetes)
 
 <!-- /TOC -->
 
@@ -17,9 +18,9 @@ The training path to start this journey will be the following one:
 
 - Visual Studio
 
-- Docker
-
 - Kubernetes
+
+- Docker
 
 - Terraform
 
@@ -52,3 +53,9 @@ Nice HowTo here to improve the way we write down md files in VSCode: <https://th
 
 Inluding a reference with a cheatsheet to easily retrieve legacy md syntax:
 <https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet>
+
+
+# 4. Kubernetes
+
+The link below is a great support to learn K8s from the basics:
+https://www.youtube.com/watch?v=X48VuDVv0do
