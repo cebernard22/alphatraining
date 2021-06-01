@@ -6,6 +6,7 @@
 - [2. Git](#2-git)
 - [3. Visual Studio Code](#3-visual-studio-code)
 - [4. Kubernetes](#4-kubernetes)
+  - [4.1. Ingress](#41-ingress)
 
 <!-- /TOC -->
 
@@ -59,3 +60,22 @@ Inluding a reference with a cheatsheet to easily retrieve legacy md syntax:
 
 The link below is a great support to learn K8s from the basics:
 https://www.youtube.com/watch?v=X48VuDVv0do
+
+## 4.1. Ingress
+Ingress inside WSL is a bit tricky. 
+Following command is not working fine:
+
+```
+minikube addons enable ingress
+```
+
+Workaround is to use a cloud ingress controller like NGINX, as describred here: 
+https://hellokube.dev/posts/configure-minikube-ingress-on-wsl2/
+
+In case you are having issues to access the services from windows webbrowser, an additionnal workaround is to use a webbrowser installed in a WSL Linux instance. Xserver shall be installed for this purpose until Windows relase WSL update ( planned in 2021)
+https://techcommunity.microsoft.com/t5/windows-dev-appconsult/running-wsl-gui-apps-on-windows-10/ba-p/1493242
+
+Do not forget to keep opened a terminal instance where the following command is executed:
+```
+minikube tunnel
+```
