@@ -6,6 +6,8 @@
 - [3. Visual Studio Code](#3-visual-studio-code)
 - [4. Kubernetes](#4-kubernetes)
   - [4.1. Ingress](#41-ingress)
+- [5. Docker](#5-docker)
+  - [5.1. Docker Registery](#51-docker-registery)
 
 <!-- /TOC -->
 
@@ -89,3 +91,22 @@ minikube tunnel
 
 In case you are having issues to access the services from windows webbrowser, an additionnal workaround is to use a webbrowser installed in a WSL Linux instance. Xserver shall be installed for this purpose until Windows relase WSL update ( planned in 2021)
 <https://techcommunity.microsoft.com/t5/windows-dev-appconsult/running-wsl-gui-apps-on-windows-10/ba-p/1493242>
+
+# 5. Docker
+
+The link below is a great support to learn Docker in an efficient way:
+<https://www.youtube.com/watch?v=3c-iBn73dD
+Do not forget to use docker plugin from Visul Studio Code. CLI commands are nice to learn, but efficiency is improved using this plugin.
+
+## 5.1. Docker Registery
+
+For public docker registry, dockerhub is the way to go.
+
+For private docker registry, free plan from gitlab is a good way to start with: 10GB available, for free :-)
+<https://about.gitlab.com/blog/2016/05/23/gitlab-container-registry
+
+Other alternatives can be found here:
+<https://www.slant.co/topics/2436/~best-docker-image-private-registries>
+
+
+
