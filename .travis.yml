@@ -1,10 +1,16 @@
 language: python
 # command to install dependencies
+before_install:
+  - python --version
+  - pip install -U pip #update to the latest version of pip
+  - pip install -U pytest  
+  - pip install codecov
 install:
   - pip install -r requirements.txt
-  - pip install pytest
-  - pip install .
+  - pip install ".[test]" . # install package + test dependencies  
 # command to run tests
 script:
-  - pytest  tests/
+  - pytest tests  # run tests
+after_success:
+  - codecov # submit coverage
   

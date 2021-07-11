@@ -2,3 +2,13 @@
 tests/__pycache__/test_good_guy.cpython-38-pytest-6.2.4.pyc
 tests/__pycache__/test_travis.cpython-38-pytest-6.2.4.pyc
 tests/__pycache__/__init__.cpython-38.pyc
+dist/alphamonitor-cebernard22-0.0.1.tar.gz
+dist/alphamonitor_cebernard22-0.0.1-py3-none-any.whl
+src/alphamonitor_cebernar.egg-info/PKG-INFO
+src/alphamonitor_cebernar.egg-info/SOURCES.txt
+src/alphamonitor_cebernar.egg-info/top_level.txt
+src/alphamonitor_cebernard22.egg-info/dependency_links.txt
+src/alphamonitor_cebernard22.egg-info/PKG-INFO
+src/alphamonitor_cebernard22.egg-info/SOURCES.txt
+src/alphamonitor_cebernard22.egg-info/top_level.txt
+src/alphamonitor_cebernar.egg-info/dependency_links.txt
