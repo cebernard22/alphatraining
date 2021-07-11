@@ -95,7 +95,7 @@ In case you are having issues to access the services from windows webbrowser, an
 # 5. Docker
 
 The link below is a great support to learn Docker in an efficient way:
-<https://www.youtube.com/watch?v=3c-iBn73dD
+<<https://www.youtube.com/watch?v=3c-iBn73dD>
 Do not forget to use docker plugin from Visul Studio Code. CLI commands are nice to learn, but efficiency is improved using this plugin.
 
 ## 5.1. Docker Registery
@@ -103,10 +103,7 @@ Do not forget to use docker plugin from Visul Studio Code. CLI commands are nice
 For public docker registry, dockerhub is the way to go.
 
 For private docker registry, free plan from gitlab is a good way to start with: 10GB available, for free :-)
-<https://about.gitlab.com/blog/2016/05/23/gitlab-container-registry
+<<https://about.gitlab.com/blog/2016/05/23/gitlab-container-registry>
 
 Other alternatives can be found here:
 <https://www.slant.co/topics/2436/~best-docker-image-private-registries>
-
-
-
