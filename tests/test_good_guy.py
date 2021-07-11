@@ -1,24 +1,23 @@
 #! /usr/bin/env python3
 
 """First python module to test triggering in Travis CI.
-Random value as an outcome to simulate fail/pass criteria
+This test is always a success. Only purpose is to get a least on success in the testlist result :-D
 """
 
 
-import random
 
 
 
-def simpleTest():
-    dummyValue=random.randint(0, 9)
+def test_NiceTest():
+    res=9
     if dummyValue>=5 :
         res=1;
     else:
         res=-1;
     print( "Test outcome:",res)
+    assert res > 0, 'NiceTest failed...really?'
     return res;
 
 
-print('Hello from Travis')
-assert simpleTest() > 0, 'Test failed'
+
 
