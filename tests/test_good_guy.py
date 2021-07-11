@@ -9,7 +9,7 @@ This test is always a success. Only purpose is to get a least on success in the 
 
 
 def test_NiceTest():
-    res=9
+    dummyValue=9
     if dummyValue>=5 :
         res=1;
     else:
