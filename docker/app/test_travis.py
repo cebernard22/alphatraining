@@ -11,7 +11,6 @@ import random
 
 def simpleTest():
     dummyValue=random.randint(0, 9)
-    print(dummyValue)
     if dummyValue>=5 :
         res=0;
     else:
