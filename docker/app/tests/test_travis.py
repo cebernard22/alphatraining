@@ -11,9 +11,8 @@ import random
 
 def simpleTest():
     dummyValue=random.randint(0, 9)
-    print(dummyValue)
     if dummyValue>=5 :
-        res=0;
+        res=1;
     else:
         res=-1;
     print( "Test outcome:",res)
@@ -21,5 +20,5 @@ def simpleTest():
 
 
 print('Hello from Travis')
-simpleTest()
+assert simpleTest() > 0, 'Test failed'
 
