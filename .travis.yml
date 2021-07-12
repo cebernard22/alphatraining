@@ -41,6 +41,6 @@ stages:
 - name: test
   if: type = pull_request
 - name: build
-  if: type = push AND branch = cd
+  if: type = push AND branch = travis_issue
 
 
