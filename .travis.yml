@@ -4,14 +4,14 @@ cache: pip
 before_install:
   - python --version
   - pip install -U pip #update to the latest version of pip
-  - pip install -U pytest  
+  - pip install -U pytest-cov  
   - pip install codecov
 install:
   - pip install -r requirements.txt
   - pip install ".[test]" . # install package + test dependencies  
 # command to run tests
 script:
-  - pytest tests  # run tests
-after_success:
-  - codecov # submit coverage
+  - pytest --cov-report term --cov=./ tests  # run tests
+after_script:
+  - bash <(curl -s https://codecov.io/bash) # submit coverage,whatever we have failure or success
   

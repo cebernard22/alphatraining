@@ -7,3 +7,6 @@
 
 def add_one(number):
     return number + 1
+
+def missing_coverage(number):
+    print("This function has no test defined. Built to tweak coverage result")
