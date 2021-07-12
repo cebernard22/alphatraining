@@ -13,5 +13,5 @@ install:
 script:
   - pytest --cov-report term --cov=./ tests  # run tests
 after_success:
-  - codecov # submit coverage
+  - bash <(curl -s https://codecov.io/bash) # submit coverage
   
