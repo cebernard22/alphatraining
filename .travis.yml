@@ -34,11 +34,11 @@ jobs:
       script:
       - python3 -m build
     - stage: deploy    
-        provider: pypi
-        username: "__token__"
-        password:
-          secure: env(secure)
-        server: https://test.pypi.org/legacy/
+      provider: pypi
+      username: "__token__"
+      password:
+        secure: env(secure)
+      server: https://test.pypi.org/legacy/
 
 stages:
 - name: test
