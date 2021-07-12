@@ -134,4 +134,3 @@ Alphamonitor will be packaged, and TravisCI will be used to trigger the CI/CD sy
   pip install --editable .
 ```
 
-  
