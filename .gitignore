@@ -1,1 +1,4 @@
 .vscode/settings.json
+tests/__pycache__/test_good_guy.cpython-38-pytest-6.2.4.pyc
+tests/__pycache__/test_travis.cpython-38-pytest-6.2.4.pyc
+tests/__pycache__/__init__.cpython-38.pyc
