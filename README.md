@@ -8,6 +8,7 @@
   - [4.1. Ingress](#41-ingress)
 - [5. Docker](#5-docker)
   - [5.1. Docker Registery](#51-docker-registery)
+- [6. Python](#6-python)
 
 <!-- /TOC -->
 
@@ -35,6 +36,9 @@ The training path to start this journey will be the following one:
 - S3
 
 - Artifactory
+
+
+Some tips will also be shared on Python & TravisCI, since used from functionnal point of view
   
 # 2. Git
 
@@ -107,3 +111,17 @@ For private docker registry, free plan from gitlab is a good way to start with: 
 
 Other alternatives can be found here:
 <https://www.slant.co/topics/2436/~best-docker-image-private-registries>
+
+# 6. Python
+
+For training purpose, we will create a python module called alphamonitor interacting with JIRA project. 
+Sources codes are located in alphamonitor directory, and testfiles triggered by pytest will be located in test directory.
+From VSCode, we take the benefit of "Testing" tab and "Run and Debug" tab.
+Short reminder on pytest:
+* test files names using test_ as prefix, 
+* tests named using test_ as prefix in the function name, 
+* assert used to trigger errors
+
+Alphamonitor will be packaged, and TravisCI will be used to trigger the CI/CD system. TravisCI is used here as a nice candidate in case we don't have any jenkins server in place.
+
+Nice link to get more insights on python package : <https://packaging.python.org/tutorials/packaging-projects/>
