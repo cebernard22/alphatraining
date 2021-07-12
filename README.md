@@ -137,3 +137,4 @@ Alphamonitor will be packaged, and TravisCI will be used to trigger the CI/CD sy
 - Another useful link to quickstart using TravisCI for python : <https://blog.travis-ci.com/2019-08-07-extensive-python-testing-on-travis-ci>
 - Coverage capacity using TravisCI & codecov: <https://dev.to/j0nimost/using-codecov-with-travis-ci-pytest-cov-1dfj>
 - Encrypted key when it comes to publish distribution: <https://docs.travis-ci.com/user/deployment/pypi/>
+- Useful to check for travis.yml consistency : travis lint from travis CLI command 
