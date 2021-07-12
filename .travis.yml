@@ -12,6 +12,6 @@ install:
 # command to run tests
 script:
   - pytest --cov-report term --cov=./ tests  # run tests
-after_success:
-  - bash <(curl -s https://codecov.io/bash) # submit coverage
+after_script:
+  - bash <(curl -s https://codecov.io/bash) # submit coverage,whatever we have failure or success
   

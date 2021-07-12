@@ -126,9 +126,12 @@ Alphamonitor will be packaged, and TravisCI will be used to trigger the CI/CD sy
 
 - Nice link to get more insights on python package : <https://packaging.python.org/tutorials/packaging-projects/>
 - Another useful link to quickstart using TravisCI for python : <https://blog.travis-ci.com/2019-08-07-extensive-python-testing-on-travis-ci>
+- Coverage capacity using TravisCI & codecov: <https://dev.to/j0nimost/using-codecov-with-travis-ci-pytest-cov-1dfj>
 - pytest: <https://docs.pytest.org/en/latest/explanation/goodpractices.html#test-discovery>
   Using venv to test the local copy of the code, do not forget to execute the following command:
 
 ```bash
   pip install --editable .
 ```
+
+  
