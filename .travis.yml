@@ -31,10 +31,16 @@ jobs:
       - pytest --cov-report term --cov=./ tests
       after_script:
       - bash <(curl -s https://codecov.io/bash) # submit coverage,whatever we have failure or success
+    - stage: build
+      script:
+      - echo 'Build Python package'
+      - python3 -m build
 
 
 stages:
 - name: test
   if: type = pull_request
+- name: build
+  if: type = push AND branch = cd
 
 
