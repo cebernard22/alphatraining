@@ -37,7 +37,6 @@ The training path to start this journey will be the following one:
 
 - Artifactory
 
-
 Some tips will also be shared on Python & TravisCI, since used from functionnal point of view
   
 # 2. Git
@@ -114,14 +113,22 @@ Other alternatives can be found here:
 
 # 6. Python
 
-For training purpose, we will create a python module called alphamonitor interacting with JIRA project. 
+For training purpose, we will create a python module called alphamonitor interacting with JIRA project.
 Sources codes are located in alphamonitor directory, and testfiles triggered by pytest will be located in test directory.
 From VSCode, we take the benefit of "Testing" tab and "Run and Debug" tab.
 Short reminder on pytest:
-* test files names using test_ as prefix, 
-* tests named using test_ as prefix in the function name, 
-* assert used to trigger errors
+
+- test files names using test_ as prefix,
+- tests named using test_ as prefix in the function name,
+- assert used to trigger errors
 
 Alphamonitor will be packaged, and TravisCI will be used to trigger the CI/CD system. TravisCI is used here as a nice candidate in case we don't have any jenkins server in place.
 
-Nice link to get more insights on python package : <https://packaging.python.org/tutorials/packaging-projects/>
+- Nice link to get more insights on python package : <https://packaging.python.org/tutorials/packaging-projects/>
+- Another useful link to quickstart using TravisCI for python : <https://blog.travis-ci.com/2019-08-07-extensive-python-testing-on-travis-ci>
+- pytest: <https://docs.pytest.org/en/latest/explanation/goodpractices.html#test-discovery>
+  Using venv to test the local copy of the code, do not forget to execute the following command:
+
+```bash
+  pip install --editable .
+```

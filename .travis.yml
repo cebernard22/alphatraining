@@ -1,4 +1,5 @@
 language: python
+cache: pip
 # command to install dependencies
 before_install:
   - python --version
