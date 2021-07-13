@@ -32,5 +32,6 @@ jobs:
         provider: pypi
         username: "__token__"
         password: $TEST_PYPI_PASS
+        distributions: "sdist bdist_wheel"
         server: https://test.pypi.org/legacy/
 
