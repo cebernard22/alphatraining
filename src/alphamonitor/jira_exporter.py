@@ -9,5 +9,6 @@ def add_one(number):
     print("Message for test purpose only to ckeck for distribution update")
     return number + 1
 
-def missing_coverage(number):
-    print("This function has no test defined. Built to tweak coverage result")
+def add_two(number):
+    print("Message for test purpose only to ckeck for distribution update and coverage improvement, release 0.0.3")
+    return number + 2
