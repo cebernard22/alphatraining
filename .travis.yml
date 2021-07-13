@@ -38,13 +38,15 @@ jobs:
         password:
           secure: DtS6RHZIYCWiGemL8l2YrRoRRDSreSR8m2xIj+aTa9rUBX5TY79Jnf+eFQChs6nZVRu3XEPsM2QqO1UgwV3gKuwHePbczVwDM4bq5edteuQ+s581ce1RzjuFpFyHO8rqUXT6EwD8Ig4ZD27VtGWdgDpvDVOJFdpSgb8yT84zlVfM7M3ke2GayUT0PCVEYTr/5BWinRfr49Qdk2+OsMcdbKBcW3rsJXr7CYYfbvcBpyxfvlt34ToK5qgenrAP5e3cpglaUr7M2ExRMantDsqWycXZkOLFlEAARhFyo3EHBgdLBX8BOMoQVLL39uQ9BqeHb4xHQzmO47DxFxpBzBR7gAP3lSjqOKp3Y6yBpeoOqJJzolE36Qxyi4q4tbbxdV/5K8L5pWY4TIxTg3+B+zGU/ADBq7ImSTBWLrTZ9JkUFobxSX1u90vYS8C1twNekoUQ29aXfqfRyS90gx3xJW5ZC5voMeSt1SR2h7eNtLUi3MKr4YvUu7GbW0X10ruPK52KefbsiYKp8snsbLMgDWCqDMfEDQsC2mnu2TL5frxnVKUOG/HhvXcfCOpMKQTq0Jsy+IqGDJ5DlwvZuMt95xM1WcLnSaj/KR/i8VJX7kv4xfRT9q6ocGi/Q6+9q5r1eKJj1QAvek4h/p/V17m1U0Be34R7xkQ1ftXFGahT69FXtwQ=
         server: https://test.pypi.org/legacy/
+        on:
+          branch: travis_issue
 
 
 
 stages:
 - name: test
   if: type = pull_request
-- name: build
+- name: deploy
   if: type = push AND branch = travis_issue
 
 
