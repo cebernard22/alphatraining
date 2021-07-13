@@ -39,3 +39,7 @@ jobs:
         on:
           branch: main
 
+stages:
+  - test
+  - name: deploy
+    if: branch = main
