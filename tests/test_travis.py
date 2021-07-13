@@ -17,8 +17,7 @@ def test_simpleTest():
         res=-1;
     print( "Test outcome:",res)
     #assert is disabled for a while so CD process is not randomly blocked
-    #assert res > 0, 'Test failed'
-
+    #assert res > 0, 'Test failed'    
 
 
 
