@@ -6,6 +6,7 @@
 """
 
 def add_one(number):
+    print("Message for test purpose only to ckeck for distribution update")
     return number + 1
 
 def missing_coverage(number):
