@@ -33,6 +33,7 @@ jobs:
       - bash <(curl -s https://codecov.io/bash) # submit coverage,whatever we have failure or success
     - stage: deploy    
       deploy:
+        verbose: true
         provider: pypi
         user: cebernard22
         password:
