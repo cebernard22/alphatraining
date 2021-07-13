@@ -40,5 +40,5 @@ jobs:
         on:
           branches:    
             only:      
-              - master 
+              - main 
 
