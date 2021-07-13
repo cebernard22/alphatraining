@@ -28,7 +28,9 @@ jobs:
       after_script:
       - bash <(curl -s https://codecov.io/bash) # submit coverage,whatever we have failure or success
     - stage: deploy    
+      script: skip
       deploy:
+        skip_cleanup: true
         provider: pypi
         username: "__token__"
         password: $TEST_PYPI_PASS
