@@ -24,8 +24,7 @@ jobs:
     - stage: test
       script:
       - echo 'Execute Python Tests'
-      - pytest --cov-report term --cov=./ tests
-      - echo 'Python Tests completed'
+      - pytest --cov-report term --cov=./ tests      
       after_script:
       - bash <(curl -s https://codecov.io/bash) # submit coverage,whatever we have failure or success
     - stage: deploy    
