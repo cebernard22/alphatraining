@@ -38,7 +38,5 @@ jobs:
         distributions: "sdist bdist_wheel"
         server: https://test.pypi.org/legacy/
         on:
-          branches:    
-            only:      
-              - main 
+          branch: main
 
