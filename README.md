@@ -137,7 +137,8 @@ Alphamonitor will be packaged, and TravisCI will be used to trigger the CI/CD sy
 - Coverage capacity using TravisCI & codecov: <https://dev.to/j0nimost/using-codecov-with-travis-ci-pytest-cov-1dfj>
 
 - Encrypted key when it comes to publish distribution: <https://docs.travis-ci.com/user/deployment/pypi/>  
-- Check .travis.yml consistgency:
+- NiceHowto to update travis.yml file for deployment stage: <https://mikkokotila.medium.com/deploying-python-packages-to-pypi-with-travis-works-9a6597781556>
+- Check .travis.yml consistency:
 
 ```bash
   travis lint
