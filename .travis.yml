@@ -32,7 +32,6 @@ jobs:
         verbose: true
         provider: pypi
         username: "__token__"
-        password:
-          secure: "eXWvLIiU4LpOIYGp/yySVPQNCazqMzUg83QZUcfuVVb39BLBLsmv3+gSV3DY7P1zlUnT59/oFIBkrwk1U1BVLM52PYGe77Am+2fI3PTshGoJbBiUjPSw6tZ9C74nVmOVpzB0m4B0zSUQ6i4Kx0oBCrWWTmGpv+vrsuCH9xuuPaHbv1qNStxcCDXdY1Nqvooa+BVNNuxGkao9WYzPUVKvPQ/+/jNJF2JLOKakmlB+WDoGZH5YJwvx5JmrfoOvhJO7dvdO/UV0Ei8RPj9bndoXxxklVJys9HCq41/SOakChjoPt3CSO+3/7R/c5wbb2K1EvHQIm4NuQ9Wr+xeVIl2PPtYbuJ7Usi1wuT90qPX3tCwnLcNceNoQXYkyaytMFjtbbnUb1sX8asbrfRQrqpbOATNOGOdhk4fS184bW7ixnuf2QRWQcr4hPbBWFcAk/SKEEYJ4+wzW9vO4aHLnKQnP9+UQpjT9FucuGRr7iqaY0sm1GPlR57GmCsDim9KM34Xfjv5gkBuyNybjGYkhInp2y4Ej/brZyo+OQrB11+CgL/o9uOYNMxI2bNByw7q/KBt38jP4jEEG+Ef4w08MQq2m9rc+rVM2Af+8JhHkBSvXm7DM5xTibmgVmLyIb8zKMvVqtq47mbqY+2vnjz/aXyXzlpmm8lliVR6eqyTQUlqj1aA="
+        password: $TEST_PYPI_PASS
         server: https://test.pypi.org/legacy/
 
