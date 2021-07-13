@@ -1,10 +1,6 @@
 language: python
 cache: pip
 
-env:
-  global:
-    secure: DtS6RHZIYCWiGemL8l2YrRoRRDSreSR8m2xIj+aTa9rUBX5TY79Jnf+eFQChs6nZVRu3XEPsM2QqO1UgwV3gKuwHePbczVwDM4bq5edteuQ+s581ce1RzjuFpFyHO8rqUXT6EwD8Ig4ZD27VtGWdgDpvDVOJFdpSgb8yT84zlVfM7M3ke2GayUT0PCVEYTr/5BWinRfr49Qdk2+OsMcdbKBcW3rsJXr7CYYfbvcBpyxfvlt34ToK5qgenrAP5e3cpglaUr7M2ExRMantDsqWycXZkOLFlEAARhFyo3EHBgdLBX8BOMoQVLL39uQ9BqeHb4xHQzmO47DxFxpBzBR7gAP3lSjqOKp3Y6yBpeoOqJJzolE36Qxyi4q4tbbxdV/5K8L5pWY4TIxTg3+B+zGU/ADBq7ImSTBWLrTZ9JkUFobxSX1u90vYS8C1twNekoUQ29aXfqfRyS90gx3xJW5ZC5voMeSt1SR2h7eNtLUi3MKr4YvUu7GbW0X10ruPK52KefbsiYKp8snsbLMgDWCqDMfEDQsC2mnu2TL5frxnVKUOG/HhvXcfCOpMKQTq0Jsy+IqGDJ5DlwvZuMt95xM1WcLnSaj/KR/i8VJX7kv4xfRT9q6ocGi/Q6+9q5r1eKJj1QAvek4h/p/V17m1U0Be34R7xkQ1ftXFGahT69FXtwQ=
-
 
 before_install:
 - python --version
@@ -35,8 +31,8 @@ jobs:
       deploy:
         verbose: true
         provider: pypi
-        user: cebernard22
+        username: "__token__"
         password:
-          secure: DtS6RHZIYCWiGemL8l2YrRoRRDSreSR8m2xIj+aTa9rUBX5TY79Jnf+eFQChs6nZVRu3XEPsM2QqO1UgwV3gKuwHePbczVwDM4bq5edteuQ+s581ce1RzjuFpFyHO8rqUXT6EwD8Ig4ZD27VtGWdgDpvDVOJFdpSgb8yT84zlVfM7M3ke2GayUT0PCVEYTr/5BWinRfr49Qdk2+OsMcdbKBcW3rsJXr7CYYfbvcBpyxfvlt34ToK5qgenrAP5e3cpglaUr7M2ExRMantDsqWycXZkOLFlEAARhFyo3EHBgdLBX8BOMoQVLL39uQ9BqeHb4xHQzmO47DxFxpBzBR7gAP3lSjqOKp3Y6yBpeoOqJJzolE36Qxyi4q4tbbxdV/5K8L5pWY4TIxTg3+B+zGU/ADBq7ImSTBWLrTZ9JkUFobxSX1u90vYS8C1twNekoUQ29aXfqfRyS90gx3xJW5ZC5voMeSt1SR2h7eNtLUi3MKr4YvUu7GbW0X10ruPK52KefbsiYKp8snsbLMgDWCqDMfEDQsC2mnu2TL5frxnVKUOG/HhvXcfCOpMKQTq0Jsy+IqGDJ5DlwvZuMt95xM1WcLnSaj/KR/i8VJX7kv4xfRT9q6ocGi/Q6+9q5r1eKJj1QAvek4h/p/V17m1U0Be34R7xkQ1ftXFGahT69FXtwQ=
+          secure: "eXWvLIiU4LpOIYGp/yySVPQNCazqMzUg83QZUcfuVVb39BLBLsmv3+gSV3DY7P1zlUnT59/oFIBkrwk1U1BVLM52PYGe77Am+2fI3PTshGoJbBiUjPSw6tZ9C74nVmOVpzB0m4B0zSUQ6i4Kx0oBCrWWTmGpv+vrsuCH9xuuPaHbv1qNStxcCDXdY1Nqvooa+BVNNuxGkao9WYzPUVKvPQ/+/jNJF2JLOKakmlB+WDoGZH5YJwvx5JmrfoOvhJO7dvdO/UV0Ei8RPj9bndoXxxklVJys9HCq41/SOakChjoPt3CSO+3/7R/c5wbb2K1EvHQIm4NuQ9Wr+xeVIl2PPtYbuJ7Usi1wuT90qPX3tCwnLcNceNoQXYkyaytMFjtbbnUb1sX8asbrfRQrqpbOATNOGOdhk4fS184bW7ixnuf2QRWQcr4hPbBWFcAk/SKEEYJ4+wzW9vO4aHLnKQnP9+UQpjT9FucuGRr7iqaY0sm1GPlR57GmCsDim9KM34Xfjv5gkBuyNybjGYkhInp2y4Ej/brZyo+OQrB11+CgL/o9uOYNMxI2bNByw7q/KBt38jP4jEEG+Ef4w08MQq2m9rc+rVM2Af+8JhHkBSvXm7DM5xTibmgVmLyIb8zKMvVqtq47mbqY+2vnjz/aXyXzlpmm8lliVR6eqyTQUlqj1aA="
         server: https://test.pypi.org/legacy/
 
