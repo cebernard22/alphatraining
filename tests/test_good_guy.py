@@ -12,8 +12,6 @@ def test_NiceTest():
     dummyValue=9
     if dummyValue>=5 :
         res=1;
-    else:
-        res=-1;
     print( "Test outcome:",res)
     assert res > 0, 'NiceTest failed...really?'
     return res;

@@ -24,7 +24,7 @@ jobs:
     - stage: test
       script:
       - echo 'Execute Python Tests'
-      - pytest --cov-report term --cov=./ tests      
+      - pytest --cov-report term --cov=src tests      
       - echo 'Python Tests completed'
       after_script:
       - bash <(curl -s https://codecov.io/bash) # submit coverage,whatever we have failure or success
@@ -39,3 +39,7 @@ jobs:
         on:
           branch: main
 
+stages:
+  - test
+  - name: deploy
+    if: branch = main
