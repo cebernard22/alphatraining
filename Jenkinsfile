@@ -8,7 +8,7 @@ pipeline {
         }
         stage('Test') { 
             steps {
-                echo 'Testing product: TODO...'  
+                echo 'Testing product: TODO once build stage is completed...'  
             }
         }
         stage('Deploy') { 
