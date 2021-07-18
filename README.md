@@ -9,6 +9,7 @@
 - [5. Docker](#5-docker)
   - [5.1. Docker Registery](#51-docker-registery)
 - [6. Python](#6-python)
+- [Jenkins](#jenkins)
 
 <!-- /TOC -->
 
@@ -143,3 +144,8 @@ Alphamonitor will be packaged, and TravisCI will be used to trigger the CI/CD sy
 ```bash
   travis lint
 ```
+
+
+# 7. Jenkins
+
+Following this link to install Jenkins on minikube: <https://www.jenkins.io/doc/book/installing/kubernetes/>
