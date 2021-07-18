@@ -13,7 +13,7 @@ pipeline {
         }
         stage('Deploy') { 
             steps {
-                echo 'Deploying product: TODO...' 
+                echo 'Deploying product: TODO once other stages are completed...' 
             }
         }
     }
