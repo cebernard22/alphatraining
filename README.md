@@ -9,7 +9,8 @@
 - [5. Docker](#5-docker)
   - [5.1. Docker Registery](#51-docker-registery)
 - [6. Python](#6-python)
-- [Jenkins](#jenkins)
+- [7. Jenkins](#7-jenkins)
+  - [7.1. Github integration](#71-github-integration)
 
 <!-- /TOC -->
 
@@ -149,3 +150,14 @@ Alphamonitor will be packaged, and TravisCI will be used to trigger the CI/CD sy
 # 7. Jenkins
 
 Following this link to install Jenkins on minikube: <https://www.jenkins.io/doc/book/installing/kubernetes/>
+
+Another way is to install the jenkins master in a container, skipping Kubernetes layer: <https://www.youtube.com/watch?v=pMO26j2OUME>
+
+
+## 7.1. Github integration
+Once Jenkins is installed, webhook shall be configured so each commit/PR triggers a pipeline
+
+* Create a multibranch job and the relevant jenkinsfile: Nana's short videos will help you for this :-) : <https://www.youtube.com/watch?v=tuxO7ZXplRE>
+
+* Prepare Github webhook : <https://www.theserverside.com/blog/Coffee-Talk-Java-News-Stories-and-Opinions/Fix-No-Valid-Crumb-Error-Jenkins-GitHub-WebHook-Included>
+*  Ngrok is the easiest way to ensure Github can interact properly with you self hosted jenkins: <https://dashboard.ngrok.com/get-started/setup>
