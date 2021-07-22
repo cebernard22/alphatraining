@@ -3,8 +3,7 @@ pipeline {
 
     environment {
         ECR_REPO_URL = '664574038682.dkr.ecr.eu-west-3.amazonaws.com'
-        IMAGE_REPO = "${ECR_REPO_URL}/java-maven-app"
-        IMAGE_NAME = ""
+        IMAGE_REPO = "${ECR_REPO_URL}/java-maven-app"        
     }
 
 
@@ -14,11 +13,10 @@ pipeline {
             steps {
                 script {
                     echo 'incrementing app version...: TODO'
-                    echo 'Retrieving app version from setup.py file ...'
-                    def matcher = readFile('setup.py') =~ 'version=(.+)'
-                    def version = matcher[0][1]
+                    echo 'Retrieving app version from setup.py file ...'                    
+                    def version = sh(script: 'python3 setup.py --version', returnStdout: true)
                     env.IMAGE_NAME = "$version-$BUILD_NUMBER"
-                    echo "############ ${IMAGE_REPO}"
+                    echo "############ ${env.IMAGE_NAME}"
                 }
             }
         }

@@ -11,6 +11,7 @@
 - [6. Python](#6-python)
 - [7. Jenkins](#7-jenkins)
   - [7.1. Github integration](#71-github-integration)
+  - [7.2. Jenkins Pipeline](#72-jenkins-pipeline)
 
 <!-- /TOC -->
 
@@ -161,3 +162,23 @@ Once Jenkins is installed, webhook shall be configured so each commit/PR trigger
 
 * Prepare Github webhook : <https://www.theserverside.com/blog/Coffee-Talk-Java-News-Stories-and-Opinions/Fix-No-Valid-Crumb-Error-Jenkins-GitHub-WebHook-Included>
 *  Ngrok is the easiest way to ensure Github can interact properly with you self hosted jenkins: <https://dashboard.ngrok.com/get-started/setup>
+
+
+## 7.2. Jenkins Pipeline
+
+In case we need to execute python scripts on jenkins master ( to retrieve version id for instance) , python and dist utils needs to be installed first inside the docker image:
+
+```bash
+  docker ps
+  docker exec -u 0 -it xxxx bash 
+```
+
+-u 0 to be root user so we can install some modules in the container
+
+Then inside the docker:
+
+```bash
+  apt install python3
+   apt-get install python3-setuptools
+```
+
