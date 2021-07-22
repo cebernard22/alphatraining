@@ -35,10 +35,6 @@ pipeline {
             }
         }
         stage('Deploy') { 
-            when {
-                env.BRANCH_NAME == 'jenkinsfile'
-
-            }
             steps {
                 echo 'Deploying product to docker repository: TODO once other stages are completed...' 
                 echo 'DOCKER_LOGIN: ' + env.DOCKER_LOGIN
