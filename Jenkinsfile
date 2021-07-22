@@ -14,7 +14,7 @@ pipeline {
             steps {
                 script {
                     echo 'incrementing app version...: TODO'
-                    echo 'Retrieving app version from setup.py file...'
+                    echo 'Retrieving app version from setup.py file ...'
                     def matcher = readFile('setup.py') =~ 'version=(.+)'
                     def version = matcher[0][1]
                     env.IMAGE_NAME = "$version-$BUILD_NUMBER"
