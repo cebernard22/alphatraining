@@ -17,7 +17,7 @@ pipeline {
                     def currentVersion = sh(script: 'python3 setup.py --version', returnStdout: true)
                     echo "incrementing app version from {$currentVersion}"
                     sh "python3 -v -m pip install bumpversion"
-                    sh "./pipelines/build.sh {$currentVersion} "
+                    sh(script: "./pipelines/build.sh {$currentVersion} ", returnStdout: true)   
                     echo 'Retrieving new app version from setup.py file ...' 
                     def version = sh(script: 'python3 setup.py --version', returnStdout: true)                                    
                     env.IMAGE_NAME = "$version-$BUILD_NUMBER"
