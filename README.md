@@ -147,6 +147,8 @@ Alphamonitor will be packaged, and TravisCI will be used to trigger the CI/CD sy
   travis lint
 ```
 
+To manage version properly, a good practice is to use bum2version as described here: <https://pypi.org/project/bump2version/>
+It will be triggered from Jenkins pipeline in the build stage 
 
 # 7. Jenkins
 
@@ -179,6 +181,8 @@ Then inside the docker:
 
 ```bash
   apt install python3
-   apt-get install python3-setuptools
+  apt-get install python3-setuptools
+  apt install python3-pip
 ```
 
+To be noted running a job in the master is not a good practice. Shall be done only for quick ( and dirty) prototyping where we have not defined any node in our jenkins master
