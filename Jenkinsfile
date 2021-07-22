@@ -35,12 +35,6 @@ pipeline {
         stage('Deploy') { 
             steps {
                 echo 'Deploying product to docker repository: TODO once other stages are completed...' 
-                echo 'DOCKER_LOGIN: ' + env.DOCKER_LOGIN
-                withCredentials(usernamePassword(credentials('DOCKER_LOGIN'),usernameVariable:DOCKER_LOGIN,passwordVariable:DOCKER_PWD)) {
-                    sh "docker login to be called here using groovy script"
-                    echo "DOCKER_LOGIN:$DOCKER_LOGIN"
-                    echo "DOCKER_PWD:$DOCKER_PWD"
-                }
             }
         }
     }
