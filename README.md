@@ -11,6 +11,8 @@
 - [6. Python](#6-python)
 - [7. Jenkins](#7-jenkins)
   - [7.1. Github integration](#71-github-integration)
+  - [7.2. Jenkins Pipeline](#72-jenkins-pipeline)
+  - [7.3. Jenkins Dynamic push into github](#73-jenkins-dynamic-push-into-github)
 
 <!-- /TOC -->
 
@@ -146,6 +148,8 @@ Alphamonitor will be packaged, and TravisCI will be used to trigger the CI/CD sy
   travis lint
 ```
 
+To manage version properly, a good practice is to use bum2version as described here: <https://pypi.org/project/bump2version/>
+It will be triggered from Jenkins pipeline in the build stage 
 
 # 7. Jenkins
 
@@ -161,3 +165,65 @@ Once Jenkins is installed, webhook shall be configured so each commit/PR trigger
 
 * Prepare Github webhook : <https://www.theserverside.com/blog/Coffee-Talk-Java-News-Stories-and-Opinions/Fix-No-Valid-Crumb-Error-Jenkins-GitHub-WebHook-Included>
 *  Ngrok is the easiest way to ensure Github can interact properly with you self hosted jenkins: <https://dashboard.ngrok.com/get-started/setup>
+
+
+## 7.2. Jenkins Pipeline
+
+In case we need to execute python scripts on jenkins master ( to retrieve version id for instance) , python and dist utils needs to be installed first inside the docker image:
+
+```bash
+  docker ps
+  docker exec -u 0 -it xxxx bash 
+```
+
+-u 0 to be root user so we can install some modules in the container
+
+Then inside the docker:
+
+```bash
+  apt install python3
+  apt-get install python3-setuptools
+  apt install python3-pip
+```
+
+To be noted running a job in the master is not a good practice. Shall be done only for quick ( and dirty) prototyping where we have not defined any node in our jenkins master
+
+## 7.3. Jenkins Dynamic push into github
+In order to properly push some commits to github when the pipelines updates some files ( i.e. version files), we shall proceed as follow:
+* Generate a SSH key for jenkins master: log into jenkins docker, the run the following commands:
+  
+```bash
+  ssh-keygen -t rsa
+  cat ~/.ssh/id_rsa.pub
+```
+
+* Define this public key in the "Deploy keys" section of the github repository
+* Define the private key SSH_KEY_FOR_GITHUB in the "Global Credentials" section of jenkins master
+* Run the following commands from the jenkinsfile
+  
+  ```bash
+        stage('commit version update') {
+            steps {
+                script {
+                    withCredentials(bindings: [sshUserPrivateKey(credentialsId: 'github_ssh_key', \
+                                             keyFileVariable: 'SSH_KEY_FOR_GITHUB', \
+                                             passphraseVariable: '', \
+                                             usernameVariable: 'USER')]) {
+
+                        sh "git status"
+                        sh "git branch"
+                        sh("git config core.sshCommand 'ssh -i ${SSH_KEY_FOR_GITHUB}'")
+                        sh('git remote set-url origin git@github.com:cebernard22/alphatraining.git')
+                        sh 'git add .'
+                        sh 'git commit -m "jenkins ci: version bump"'                        
+                        sh 'git push origin HEAD:jenkinsfile'
+                    }
+                }
+            }
+        }
+```
+  
+To be noted once this works properly, whe shall use the ignore  commiter strategy plugin ( https://plugins.jenkins.io/ignore-committer-strategy/) to avoid an endless loop where setup.py update trigger another jenkins pipeline ;-)
+
+
+

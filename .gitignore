@@ -16,3 +16,4 @@ src/alphamonitor_cebernar.egg-info/dependency_links.txt
 src/alphamonitor/__pycache__/__init__.cpython-38.pyc
 src/alphamonitor/__pycache__/jira_exporter.cpython-38.pyc
 tests/__pycache__/test_alphamonitor.cpython-38-pytest-6.2.4.pyc
+dist
