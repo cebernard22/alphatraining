@@ -46,7 +46,7 @@ pipeline {
         
         stage('Build') { 
             steps {
-                echo 'Building product: TODO, updating version defined in setup.py...'  
+                echo 'Building product: TODO, building python package and updating docker image...'  
             }
         }
         stage('Test') { 
