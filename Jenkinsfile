@@ -10,6 +10,7 @@ pipeline {
     stages {
 
         stage('Increment version') {
+            when { branch "main" }
             steps {
                 script {
 
@@ -29,6 +30,7 @@ pipeline {
         }
 
         stage('commit version update') {
+            when { branch "main" }
             steps {
                 script {
                     withCredentials(bindings: [sshUserPrivateKey(credentialsId: 'github_ssh_key', \
