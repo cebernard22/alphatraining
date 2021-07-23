@@ -35,9 +35,6 @@ pipeline {
                                              keyFileVariable: 'SSH_KEY_FOR_GITHUB', \
                                              passphraseVariable: '', \
                                              usernameVariable: 'USER')]) {
-
-                        sh "git status"
-                        sh "git branch"
                         sh("git config core.sshCommand 'ssh -i ${SSH_KEY_FOR_GITHUB}'")
                         sh('git remote set-url origin git@github.com:cebernard22/alphatraining.git')
                         sh 'git add .'
