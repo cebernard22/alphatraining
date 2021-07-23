@@ -36,7 +36,7 @@ pipeline {
                         sh('git remote set-url origin git@github.com:cebernard22/alphatraining.git')
                         sh 'git add .'
                         sh 'git commit -m "jenkins ci: version bump"'                        
-                        sh 'git push origin HEAD:jenkinsfile'
+                        sh 'git push origin HEAD:main'
                     }
                 }
             }
