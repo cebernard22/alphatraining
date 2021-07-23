@@ -12,6 +12,7 @@
 - [7. Jenkins](#7-jenkins)
   - [7.1. Github integration](#71-github-integration)
   - [7.2. Jenkins Pipeline](#72-jenkins-pipeline)
+  - [7.3. Jenkins Dynamic push into github](#73-jenkins-dynamic-push-into-github)
 
 <!-- /TOC -->
 
@@ -186,3 +187,42 @@ Then inside the docker:
 ```
 
 To be noted running a job in the master is not a good practice. Shall be done only for quick ( and dirty) prototyping where we have not defined any node in our jenkins master
+
+## 7.3. Jenkins Dynamic push into github
+In order to properly push some commits to github when the pipelines updates some files ( i.e. version files), we shall proceed as follow:
+* Generate a SSH key for jenkins master: log into jenkins docker, the run the following commands:
+  
+```bash
+  ssh-keygen -t rsa
+  cat ~/.ssh/id_rsa.pub
+```
+
+* Define this public key in the "Deploy keys" section of the github repository
+* Define the private key SSH_KEY_FOR_GITHUB in the "Global Credentials" section of jenkins master
+* Run the following commands from the jenkinsfile
+  
+  ```bash
+        stage('commit version update') {
+            steps {
+                script {
+                    withCredentials(bindings: [sshUserPrivateKey(credentialsId: 'github_ssh_key', \
+                                             keyFileVariable: 'SSH_KEY_FOR_GITHUB', \
+                                             passphraseVariable: '', \
+                                             usernameVariable: 'USER')]) {
+
+                        sh "git status"
+                        sh "git branch"
+                        sh("git config core.sshCommand 'ssh -i ${SSH_KEY_FOR_GITHUB}'")
+                        sh('git remote set-url origin git@github.com:cebernard22/alphatraining.git')
+                        sh 'git add .'
+                        sh 'git commit -m "jenkins ci: version bump"'                        
+                        sh 'git push origin HEAD:jenkinsfile'
+                    }
+                }
+            }
+        }
+```
+  
+
+
+
