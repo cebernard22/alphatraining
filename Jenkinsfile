@@ -31,13 +31,17 @@ pipeline {
         stage('commit version update') {
             steps {
                 script {
-                    withCredentials([usernamePassword(credentialsId: 'github_account', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+                    withCredentials(bindings: [sshUserPrivateKey(credentialsId: 'github_ssh_key', \
+                                             keyFileVariable: 'SSH_KEY_FOR_GITHUB', \
+                                             passphraseVariable: '', \
+                                             usernameVariable: 'USER')]) {
+
                         sh "git status"
                         sh "git branch"
-                        sh "git config --list"
-                        sh('git remote set-url origin https://${USER}:${PASS}@github.com/cebernard22/alphatraining.git')
+                        sh("git config core.sshCommand 'ssh -i ${SSH_KEY_FOR_GITHUB}'")
+                        sh('git remote set-url origin git@github.com:cebernard22/alphatraining.git')
                         sh 'git add .'
-                        sh 'git commit -m "jenkins ci: version bump"'
+                        sh 'git commit -m "jenkins ci: version bump"'                        
                         sh 'git push origin HEAD:jenkinsfile'
                     }
                 }
