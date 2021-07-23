@@ -29,19 +29,19 @@ pipeline {
         }
 
         stage('commit version update') {
-                steps {
-                    script {
-                        withCredentials([usernamePassword(credentialsId: 'github_account', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
-                            sh "git status"
-                            sh "git branch"
-                            sh "git config --list"
-                            sh "git remote set-url origin https://${USER}:${PASS}@github.com/cebernard22/alphatraining.git"
-                            sh 'git add .'
-                            sh 'git commit -m "jenkins ci: version bump"'
-                            sh 'git push origin HEAD:jenkinsfile'
-                        }
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'github_account', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+                        sh "git status"
+                        sh "git branch"
+                        sh "git config --list"
+                        sh('git remote set-url origin https://${USER}:${PASS}@github.com/cebernard22/alphatraining.git')
+                        sh 'git add .'
+                        sh 'git commit -m "jenkins ci: version bump"'
+                        sh 'git push origin HEAD:jenkinsfile'
                     }
                 }
+            }
         }
 
 
