@@ -1,11 +1,6 @@
 pipeline {
     agent any 
 
-    environment {
-        ECR_REPO_URL = '664574038682.dkr.ecr.eu-west-3.amazonaws.com'
-        IMAGE_REPO = "${ECR_REPO_URL}/java-maven-app"        
-    }
-
 
     stages {
 
