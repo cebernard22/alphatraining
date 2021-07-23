@@ -16,7 +16,7 @@ pipeline {
                     echo 'Retrieving current app version from setup.py file ...'                    
                     def currentVersion = sh(script: 'python3 setup.py --version', returnStdout: true)
                     echo "incrementing app version from ${currentVersion}"
-                    sh "python3 -v -m pip install bumpversion"
+                    //sh "python3 -v -m pip install bumpversion"
                     sh(script: "./pipelines/build.sh ${currentVersion} ", returnStdout: true)   
                     echo 'Retrieving new app version from setup.py file ...' 
                     def version = sh(script: 'python3 setup.py --version', returnStdout: true)                                    
