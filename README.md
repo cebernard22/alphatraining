@@ -223,6 +223,7 @@ In order to properly push some commits to github when the pipelines updates some
         }
 ```
   
+To be noted once this works properly, whe shall use the ignore  commiter strategy plugin ( https://plugins.jenkins.io/ignore-committer-strategy/) to avoid an endless loop where setup.py update trigger another jenkins pipeline ;-)
 
 
 
