@@ -48,6 +48,10 @@ pipeline {
             steps {
                 echo 'Building product: TODO, building python package and updating docker image...'  
                 script {
+                    echo "building python package...."
+                    sh "pip install -v -q 'setupext-janitor'"
+                    sh 'python3 setup.py clean --all'
+                    sh 'python3 setup.py sdist bdist_wheel'
                     echo "building the docker image ${IMAGE_NAME}..."
                     withCredentials([usernamePassword(credentialsId: 'gitlab_registry', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
                         sh "docker build -t ce.bernard.perso/alphatraining:${IMAGE_NAME} ."
