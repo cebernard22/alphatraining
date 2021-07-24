@@ -31,8 +31,7 @@ pipeline {
                 script {
                     echo "building python package...."
                     sh 'python3 setup.py clean --all'
-                    sh 'python3 setup.py sdist bdist_wheel'
-                    echo "building the docker image ${IMAGE_NAME}..."
+                    sh 'python3 setup.py sdist bdist_wheel'                    
                 }               
             }
         }
