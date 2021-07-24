@@ -7,6 +7,7 @@ pipeline {
 
         
         stage('Build') { 
+            agent { label 'build' }
             steps {
                 echo 'Building product: TODO, building python package and updating docker image...'  
                 script {
