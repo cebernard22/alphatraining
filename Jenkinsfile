@@ -4,6 +4,35 @@ pipeline {
 
     stages {
 
+
+        
+        stage('Build') { 
+            steps {
+                echo 'Building product: TODO, building python package and updating docker image...'  
+                script {
+                    echo "building python package...."
+                    sh 'python3 setup.py clean --all'
+                    sh 'python3 setup.py sdist bdist_wheel'
+                    echo "building the docker image ${IMAGE_NAME}..."
+                    withCredentials([usernamePassword(credentialsId: 'gitlab_registry', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+                        sh "docker build -t ce.bernard.perso/alphatraining:${IMAGE_NAME} ."
+                        sh "echo $PASS | docker login registry.gitlab.com -u $USER --password-stdin"
+                        //sh "docker push registry.gitlab.com/ce.bernard.perso/alphatraining:${IMAGE_NAME}"
+
+                    }
+                }
+
+                
+            }
+        }
+        stage('Test') { 
+            steps {
+                echo 'Testing product: TODO once build stage is completed...'  
+            }
+        }
+
+
+
         stage('Increment version') {
             agent { label 'build' }
             when { branch "jenkinsfile" }
@@ -44,32 +73,8 @@ pipeline {
         }
 
 
-        
-        stage('Build') { 
-            steps {
-                echo 'Building product: TODO, building python package and updating docker image...'  
-                script {
-                    echo "building python package...."
-                    sh "pip install -v -q 'setupext-janitor'"
-                    sh 'python3 setup.py clean --all'
-                    sh 'python3 setup.py sdist bdist_wheel'
-                    echo "building the docker image ${IMAGE_NAME}..."
-                    withCredentials([usernamePassword(credentialsId: 'gitlab_registry', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
-                        sh "docker build -t ce.bernard.perso/alphatraining:${IMAGE_NAME} ."
-                        sh "echo $PASS | docker login registry.gitlab.com -u $USER --password-stdin"
-                        //sh "docker push registry.gitlab.com/ce.bernard.perso/alphatraining:${IMAGE_NAME}"
 
-                    }
-                }
 
-                
-            }
-        }
-        stage('Test') { 
-            steps {
-                echo 'Testing product: TODO once build stage is completed...'  
-            }
-        }
         stage('Deploy') { 
             steps {
                 echo 'Deploying product to docker repository: TODO once other stages are completed...' 
