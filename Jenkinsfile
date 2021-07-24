@@ -5,7 +5,8 @@ pipeline {
     stages {
 
         stage('Increment version') {
-            when { branch "main" }
+            agent { label 'build' }
+            when { branch "jenkinsfile" }
             steps {
                 script {
 

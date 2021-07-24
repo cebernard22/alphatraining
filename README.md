@@ -208,6 +208,7 @@ In order to avoid running pipelines on master, we can connect some docker using 
 evn.list is used so we can get the benefit of websocket, and avoid having some connection refused for TCP port 50000
 
 More informations here: <https://plugins.jenkins.io/digitalocean-plugin/>  , <https://hub.docker.com/r/jenkins/inbound-agent>
+Note: "Launch agent by connecting it to the master"  is same as "launch agent via java web start"
 
 ## 7.4. Jenkins Dynamic push into github
 
