@@ -24,7 +24,7 @@ pipeline {
             }
         }
         
-        stage('Build') { 
+        stage('BuildPython') { 
             agent { label 'build' }
             steps {
                 echo 'Building product: TODO, building python package and updating docker image...'  
@@ -33,19 +33,28 @@ pipeline {
                     sh 'python3 setup.py clean --all'
                     sh 'python3 setup.py sdist bdist_wheel'
                     echo "building the docker image ${IMAGE_NAME}..."
+                }               
+            }
+        }
+
+
+        stage('BuildDocker') { 
+            agent { label 'master' }
+            steps {
+                echo 'Building docker image ( cannot be done from a slave container since docker is not available)...'  
+                script {
+                    echo "building the docker image ${IMAGE_NAME}..."
                     withCredentials([usernamePassword(credentialsId: 'gitlab_registry', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
                         sh "docker build -t ce.bernard.perso/alphatraining:${IMAGE_NAME} ."
                         sh "echo $PASS | docker login registry.gitlab.com -u $USER --password-stdin"
                         //sh "docker push registry.gitlab.com/ce.bernard.perso/alphatraining:${IMAGE_NAME}"
 
                     }
-                }
-
-                
+                }                
             }
-        }
+        }            
 
-        
+
         stage('Test') { 
             steps {
                 echo 'Testing product: TODO once build stage is completed...'  
