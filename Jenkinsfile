@@ -47,6 +47,17 @@ pipeline {
         stage('Build') { 
             steps {
                 echo 'Building product: TODO, building python package and updating docker image...'  
+                script {
+                    echo "building the docker image ${IMAGE_NAME}..."
+                    withCredentials([usernamePassword(credentialsId: 'gitlab_registry', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+                        sh "docker build -t ce.bernard.perso/alphatraining:${IMAGE_NAME} ."
+                        sh "echo $PASS | docker login registry.gitlab.com -u $USER --password-stdin"
+                        //sh "docker push registry.gitlab.com/ce.bernard.perso/alphatraining:${IMAGE_NAME}"
+
+                    }
+                }
+
+                
             }
         }
         stage('Test') { 
