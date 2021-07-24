@@ -12,7 +12,8 @@
 - [7. Jenkins](#7-jenkins)
   - [7.1. Github integration](#71-github-integration)
   - [7.2. Jenkins Pipeline](#72-jenkins-pipeline)
-  - [7.3. Jenkins Dynamic push into github](#73-jenkins-dynamic-push-into-github)
+  - [7.3. Jenkins Slave](#73-jenkins-slave)
+  - [7.4. Jenkins Dynamic push into github](#74-jenkins-dynamic-push-into-github)
 
 <!-- /TOC -->
 
@@ -139,6 +140,7 @@ Side note: in case pip install is (super) slow, check that DISPLAY variable is u
 ```bash
   unset DISPLAY
 ```
+
 Check here for more details : <https://github.com/pypa/pip/issues/8485>
 
 Alphamonitor will be packaged, and TravisCI will be used to trigger the CI/CD system. TravisCI is used here as a nice candidate in case we don't have any jenkins server in place.
@@ -194,9 +196,23 @@ Then inside the docker:
 
 To be noted running a job in the master is not a good practice. Shall be done only for quick ( and dirty) prototyping where we have not defined any node in our jenkins master
 
-## 7.3. Jenkins Dynamic push into github
+## 7.3. Jenkins Slave
+
+In order to avoid running pipelines on master, we can connect some docker using jlnp connections:
+
+```bash
+   docker run -d --env-file ./jenkinsslave/env.list jenkins/inbound-agent -url <NGROK_ADRESS> <SECRET> docker_node
+
+```
+
+evn.list is used so we can get the benefit of websocket, and avoid having some connection refused for TCP port 50000
+
+More informations here: <https://plugins.jenkins.io/digitalocean-plugin/>  , <https://hub.docker.com/r/jenkins/inbound-agent>
+
+## 7.4. Jenkins Dynamic push into github
 
 In order to properly push some commits to github when the pipelines updates some files ( i.e. version files), we shall proceed as follow:
+
 - Generate a SSH key for jenkins master: log into jenkins docker, the run the following commands:
   
 ```bash
