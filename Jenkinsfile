@@ -4,7 +4,25 @@ pipeline {
 
     stages {
 
+        stage('Increment version') {
+            agent { label 'build' }
+            when { branch "jenkinsfile" }
+            steps {
+                script {
 
+                    echo 'Retrieving current app version from setup.py file ...'                    
+                    def currentVersion = sh(script: 'python3 setup.py --version', returnStdout: true)
+                    echo "incrementing app version from ${currentVersion}"                    
+                    sh(script: "./pipelines/build.sh ${currentVersion} ", returnStdout: true)   
+                    echo 'Retrieving new app version from setup.py file ...' 
+                    def version = sh(script: 'python3 setup.py --version', returnStdout: true)                                    
+                    env.IMAGE_NAME = "$version-$BUILD_NUMBER"
+                    echo "############ ${env.IMAGE_NAME}"
+
+
+                }
+            }
+        }
         
         stage('Build') { 
             agent { label 'build' }
@@ -26,6 +44,8 @@ pipeline {
                 
             }
         }
+
+        
         stage('Test') { 
             steps {
                 echo 'Testing product: TODO once build stage is completed...'  
@@ -34,26 +54,7 @@ pipeline {
 
 
 
-        stage('Increment version') {
-            agent { label 'build' }
-            when { branch "jenkinsfile" }
-            steps {
-                script {
 
-                    echo 'Retrieving current app version from setup.py file ...'                    
-                    def currentVersion = sh(script: 'python3 setup.py --version', returnStdout: true)
-                    echo "incrementing app version from ${currentVersion}"
-                    //sh "python3 -v -m pip install bumpversion"
-                    sh(script: "./pipelines/build.sh ${currentVersion} ", returnStdout: true)   
-                    echo 'Retrieving new app version from setup.py file ...' 
-                    def version = sh(script: 'python3 setup.py --version', returnStdout: true)                                    
-                    env.IMAGE_NAME = "$version-$BUILD_NUMBER"
-                    echo "############ ${env.IMAGE_NAME}"
-
-
-                }
-            }
-        }
 
         stage('commit version update') {
             when { branch "main" }
