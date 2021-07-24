@@ -9,7 +9,7 @@
 
     # including python items to build python library 
     RUN apk add python3 py3-pip
-    RUN pip3 install --upgrade pip setuptools
+    RUN pip3 install --upgrade pip setuptools wheel
     RUN pip3 install bumpversion setupext-janitor
     
     
