@@ -38,7 +38,7 @@ pipeline {
 
 
         stage('BuildDocker') { 
-            agent { label 'master' }
+            agent { label 'build' }
             steps {
                 echo 'Building docker image ( cannot be done from a slave container since docker is not available)...'  
                 script {

@@ -13,6 +13,7 @@
   - [7.1. Github integration](#71-github-integration)
   - [7.2. Jenkins Pipeline](#72-jenkins-pipeline)
   - [7.3. Jenkins Slave](#73-jenkins-slave)
+    - [7.3.1. Docker in Docker](#731-docker-in-docker)
   - [7.4. Jenkins Dynamic push into github](#74-jenkins-dynamic-push-into-github)
 
 <!-- /TOC -->
@@ -201,7 +202,7 @@ To be noted running a job in the master is not a good practice. Shall be done on
 In order to avoid running pipelines on master, we can connect some docker using jlnp connections:
 
 ```bash
-   docker run -d --env-file ./jenkinsslave/env.list jenkins/inbound-agent -url <NGROK_ADRESS> <SECRET> docker_node
+   docker run -d -v "//var/run/docker.sock:/var/run/docker.sock" --env-file ./jenkinsslave/env.list jenkins/inbound-agent -url <NGROK_ADRESS> <SECRET> docker_node
 
 ```
 
@@ -209,6 +210,50 @@ evn.list is used so we can get the benefit of websocket, and avoid having some c
 
 More informations here: <https://plugins.jenkins.io/digitalocean-plugin/>  , <https://hub.docker.com/r/jenkins/inbound-agent>
 Note: "Launch agent by connecting it to the master"  is same as "launch agent via java web start"
+
+### 7.3.1. Docker in Docker
+
+In case the slave needs to run docker CLI to build and/or push images to a docker repository, the slave docker image needs to get docker inside, and the container tweaked a little bit:
+
+- docker.sock needs to be mapped
+- jenkins user needs to be added to docker group. To proceed, do as follows:
+
+- Retrieve docker group id from host running
+
+  ```bash
+  id
+  ```
+
+  - define this group in the container
+
+    ```bash
+
+  groupadd -g dockergroupid docker
+  ```
+
+ - add jenkins user to this group
+
+    ```bash
+
+  groupadd -g dockergroupid docker
+  ```
+
+
+  These commands can/should be included in the dockerfile so no manual post install operation is needed
+
+  ```bash
+  RUN adduser -S -D -h /usr/app/src jenkins
+  RUN addgroup -g 1001
+  RUN usermod -aG 1001 jenkins
+
+  ```
+
+
+  
+
+
+
+Check here for more details: <https://tomgregory.com/running-docker-in-docker-on-windows/>
 
 ## 7.4. Jenkins Dynamic push into github
 
