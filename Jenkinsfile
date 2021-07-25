@@ -69,7 +69,7 @@ pipeline {
 
         stage('DeployDocker') { 
             agent { label 'build' }
-            when { branch "jenkinsfile" }
+            when { branch "main" }
             steps {
                 echo 'Building docker image ...'  
                 script {
