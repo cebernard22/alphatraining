@@ -29,6 +29,7 @@
 
 
 
-    #Test: docker run -v "//var/run/docker.sock:/var/run/docker.sock" -d --env-file ./jenkinsslave/env.list build-slave:0.2 -url http://5418f13bb944.ngrok.io <SECRET_ID> <JENKINS_NODE_REF>
+    #Test: docker run -v "//var/run/docker.sock:/var/run/docker.sock" -d --env-file build-slave:0.2 -url <JENKINS_MASTER_IP> <SECRET_ID> <JENKINS_NODE_REF>
+    #JENKINS_MASTER_IP : docker ip ( retrieved using docker inspect command )
     
 
