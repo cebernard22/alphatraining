@@ -77,12 +77,12 @@ pipeline {
                     def version = sh(script: 'python3 setup.py --version', returnStdout: true)                                    
                     version = version.replaceAll(/\s*$/, '')
                     env.IMAGE_NAME = "$version-$BUILD_NUMBER"                    
-                    echo "building and pushing the docker image ${env.IMAGE_NAME}..."
-                    withCredentials([usernamePassword(credentialsId: 'gitlab_registry', passwordVariable: 'PASS', usernameVariable: 'USER')]) {                        
-                        sh(print("--------------  ${IMAGE_NAME}... -------------------------"))
-                        sh "docker build -t registry.gitlab.com/ce.bernard.perso/alphatraining:${IMAGE_NAME} ."
+                    env.IMAGE_REF="registry.gitlab.com/ce.bernard.perso/alphatraining"
+                    echo "building and pushing the docker image ${env.IMAGE_REF}:${env.IMAGE_NAME}..."
+                    withCredentials([usernamePassword(credentialsId: 'gitlab_registry', passwordVariable: 'PASS', usernameVariable: 'USER')]) {                                                
+                        sh "docker build -t ${IMAGE_REF}:${IMAGE_NAME} ."
                         sh "echo $PASS | docker login registry.gitlab.com -u $USER --password-stdin"
-                        sh "docker push registry.gitlab.com/ce.bernard.perso/alphatraining:${IMAGE_NAME}" 
+                        sh "docker push ${IMAGE_REF}:${IMAGE_NAME}" 
                     }
                 }                
             }
