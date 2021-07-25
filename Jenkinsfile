@@ -6,7 +6,7 @@ pipeline {
 
         stage('Increment version') {
             agent { label 'build' }
-            when { branch "jenkinsfile" }
+            when { branch "main" }
             steps {
                 script {
 
@@ -37,21 +37,7 @@ pipeline {
         }
 
 
-        stage('BuildDocker') { 
-            agent { label 'build' }
-            steps {
-                echo 'Building docker image ( cannot be done from a slave container since docker is not available)...'  
-                script {
-                    echo "building the docker image ${IMAGE_NAME}..."
-                    withCredentials([usernamePassword(credentialsId: 'gitlab_registry', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
-                        sh "docker build -t ce.bernard.perso/alphatraining:${IMAGE_NAME} ."
-                        sh "echo $PASS | docker login registry.gitlab.com -u $USER --password-stdin"
-                        //sh "docker push registry.gitlab.com/ce.bernard.perso/alphatraining:${IMAGE_NAME}"
-
-                    }
-                }                
-            }
-        }            
+         
 
 
         stage('Test') { 
@@ -84,11 +70,21 @@ pipeline {
 
 
 
-
-        stage('Deploy') { 
+        stage('DeployDocker') { 
+            agent { label 'build' }
+            when { branch "jenkinsfile" }
             steps {
-                echo 'Deploying product to docker repository: TODO once other stages are completed...' 
+                echo 'Building docker image ...'  
+                script {
+                    echo "building and pushing the docker image ${IMAGE_NAME}..."
+                    withCredentials([usernamePassword(credentialsId: 'gitlab_registry', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+                        sh "docker build -t registry.gitlab.com/ce.bernard.perso/alphatraining:${IMAGE_NAME} ."
+                        sh "echo $PASS | docker login registry.gitlab.com -u $USER --password-stdin"
+                        sh "docker push registry.gitlab.com/ce.bernard.perso/alphatraining:${IMAGE_NAME}"
+
+                    }
+                }                
             }
-        }
+        }           
     }
 }
