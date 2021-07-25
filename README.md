@@ -12,7 +12,9 @@
 - [7. Jenkins](#7-jenkins)
   - [7.1. Github integration](#71-github-integration)
   - [7.2. Jenkins Pipeline](#72-jenkins-pipeline)
-  - [7.3. Jenkins Dynamic push into github](#73-jenkins-dynamic-push-into-github)
+    - [7.2.1. Jenkins Dynamic push into github](#721-jenkins-dynamic-push-into-github)
+  - [7.3. Jenkins Slave](#73-jenkins-slave)
+    - [7.3.1. Docker in Docker](#731-docker-in-docker)
 
 <!-- /TOC -->
 
@@ -134,13 +136,21 @@ Using venv to test the local copy of the code, do not forget to execute the foll
   pip install --editable .
 ```
 
+Side note: in case pip install is (super) slow, check that DISPLAY variable is unset, and manually unset it if not done
+
+```bash
+  unset DISPLAY
+```
+
+Check here for more details : <https://github.com/pypa/pip/issues/8485>
+
 Alphamonitor will be packaged, and TravisCI will be used to trigger the CI/CD system. TravisCI is used here as a nice candidate in case we don't have any jenkins server in place.
 
 - Nice link to get more insights on python package : <https://packaging.python.org/tutorials/packaging-projects/>
 - Another useful link to quickstart using TravisCI for python : <https://blog.travis-ci.com/2019-08-07-extensive-python-testing-on-travis-ci>
 - Coverage capacity using TravisCI & codecov: <https://dev.to/j0nimost/using-codecov-with-travis-ci-pytest-cov-1dfj>
 
-- Encrypted key when it comes to publish distribution: <https://docs.travis-ci.com/user/deployment/pypi/>  . Using encrypted password did not work properly, I had to tweak a little bit the system using pypi-xxx passsword in the TravisCI environment variable. Probably related to a missleading copy/paste value? 
+- Encrypted key when it comes to publish distribution: <https://docs.travis-ci.com/user/deployment/pypi/>  . Using encrypted password did not work properly, I had to tweak a little bit the system using pypi-xxx passsword in the TravisCI environment variable. Probably related to a missleading copy/paste value?
 - NiceHowto to update travis.yml file for deployment stage: <https://mikkokotila.medium.com/deploying-python-packages-to-pypi-with-travis-works-9a6597781556>
 - Check .travis.yml consistency:
 
@@ -149,7 +159,7 @@ Alphamonitor will be packaged, and TravisCI will be used to trigger the CI/CD sy
 ```
 
 To manage version properly, a good practice is to use bum2version as described here: <https://pypi.org/project/bump2version/>
-It will be triggered from Jenkins pipeline in the build stage 
+It will be triggered from Jenkins pipeline in the build stage
 
 # 7. Jenkins
 
@@ -157,15 +167,14 @@ Following this link to install Jenkins on minikube: <https://www.jenkins.io/doc/
 
 Another way is to install the jenkins master in a container, skipping Kubernetes layer: <https://www.youtube.com/watch?v=pMO26j2OUME>
 
-
 ## 7.1. Github integration
+
 Once Jenkins is installed, webhook shall be configured so each commit/PR triggers a pipeline
 
-* Create a multibranch job and the relevant jenkinsfile: Nana's short videos will help you for this :-) : <https://www.youtube.com/watch?v=tuxO7ZXplRE>
+- Create a multibranch job and the relevant jenkinsfile: Nana's short videos will help you for this :-) : <https://www.youtube.com/watch?v=tuxO7ZXplRE>
 
-* Prepare Github webhook : <https://www.theserverside.com/blog/Coffee-Talk-Java-News-Stories-and-Opinions/Fix-No-Valid-Crumb-Error-Jenkins-GitHub-WebHook-Included>
-*  Ngrok is the easiest way to ensure Github can interact properly with you self hosted jenkins: <https://dashboard.ngrok.com/get-started/setup>
-
+- Prepare Github webhook : <https://www.theserverside.com/blog/Coffee-Talk-Java-News-Stories-and-Opinions/Fix-No-Valid-Crumb-Error-Jenkins-GitHub-WebHook-Included>
+- Ngrok is the easiest way to ensure Github can interact properly with you self hosted jenkins: <https://dashboard.ngrok.com/get-started/setup>
 
 ## 7.2. Jenkins Pipeline
 
@@ -188,18 +197,20 @@ Then inside the docker:
 
 To be noted running a job in the master is not a good practice. Shall be done only for quick ( and dirty) prototyping where we have not defined any node in our jenkins master
 
-## 7.3. Jenkins Dynamic push into github
+### 7.2.1. Jenkins Dynamic push into github
+
 In order to properly push some commits to github when the pipelines updates some files ( i.e. version files), we shall proceed as follow:
-* Generate a SSH key for jenkins master: log into jenkins docker, the run the following commands:
+
+- Generate a SSH key for jenkins master: log into jenkins docker, the run the following commands:
   
 ```bash
   ssh-keygen -t rsa
   cat ~/.ssh/id_rsa.pub
 ```
 
-* Define this public key in the "Deploy keys" section of the github repository
-* Define the private key SSH_KEY_FOR_GITHUB in the "Global Credentials" section of jenkins master
-* Run the following commands from the jenkinsfile
+- Define this public key in the "Deploy keys" section of the github repository
+- Define the private key SSH_KEY_FOR_GITHUB in the "Global Credentials" section of jenkins master
+- Run the following commands from the jenkinsfile
   
   ```bash
         stage('commit version update') {
@@ -209,6 +220,10 @@ In order to properly push some commits to github when the pipelines updates some
                                              keyFileVariable: 'SSH_KEY_FOR_GITHUB', \
                                              passphraseVariable: '', \
                                              usernameVariable: 'USER')]) {
+
+                        #These two lines are only needed the first time. Useful in case the node is brandly new
+                        sh "git config --global user.name Jenkins"
+                        sh "git config --global user.email jenkins@alphatraining.com"
 
                         sh "git status"
                         sh "git branch"
@@ -221,9 +236,57 @@ In order to properly push some commits to github when the pipelines updates some
                 }
             }
         }
-```
+
+  ```
   
-To be noted once this works properly, whe shall use the ignore  commiter strategy plugin ( https://plugins.jenkins.io/ignore-committer-strategy/) to avoid an endless loop where setup.py update trigger another jenkins pipeline ;-)
+To be noted once this works properly, whe shall use the ignore  commiter strategy plugin ( <https://plugins.jenkins.io/ignore-committer-strategy/>) to avoid an endless loop where setup.py update trigger another jenkins pipeline ;-)
 
+## 7.3. Jenkins Slave
 
+In order to avoid running pipelines on master, we can connect some docker using jlnp connections:
 
+```bash
+   docker run -d -v "//var/run/docker.sock:/var/run/docker.sock" jenkins/inbound-agent -url <JENKINS_MASTER_ADRESS> <SECRET> docker_node
+
+```
+
+JENKINS_MASTER_ADRESS: can be retrieved using the docker inspect from Visual Studio code ( something like 172.x.x.x)
+
+More informations here: <https://plugins.jenkins.io/digitalocean-plugin/>  , <https://hub.docker.com/r/jenkins/inbound-agent>
+Note: "Launch agent by connecting it to the master"  is same as "launch agent via java web start"
+
+### 7.3.1. Docker in Docker
+
+In case the slave needs to run docker CLI to build and/or push images to a docker repository, the slave docker image needs to get docker inside, and the container tweaked a little bit:
+
+- docker.sock needs to be mapped
+- jenkins user needs to be added to docker group. To proceed, do as follows:
+
+- Retrieve docker group id from host running
+
+  ```bash
+  id
+  ```
+
+  - define this group in the container
+
+  ```bash
+  groupadd -g dockergroupid docker
+  ```
+
+- add jenkins user to this group
+
+  ```bash
+  groupadd -g dockergroupid docker
+  ```
+
+  These commands can/should be included in the dockerfile so no manual post install operation is needed
+
+  ```bash
+  RUN adduser -S -D -h /usr/app/src jenkins
+  RUN addgroup -g 1001
+  RUN usermod -aG 1001 jenkins
+
+  ```
+
+Check here for more details: <https://tomgregory.com/running-docker-in-docker-on-windows/>
