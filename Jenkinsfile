@@ -1,11 +1,10 @@
 pipeline {
-    agent any 
+    agent { label 'build' }
 
 
     stages {
 
-        stage('Increment version') {
-            agent { label 'build' }
+        stage('Increment version') {            
             when { branch "main" }
             steps {
                 script {
@@ -21,8 +20,7 @@ pipeline {
             }
         }
         
-        stage('BuildPython') { 
-            agent { label 'build' }
+        stage('BuildPython') {             
             steps {
                 echo 'Building product: TODO, building python package and updating docker image...'  
                 script {
@@ -51,9 +49,6 @@ pipeline {
 
 
 
-
-
-
         stage('commit version update') {
             when { branch "main" }
             steps {
@@ -62,7 +57,7 @@ pipeline {
                                              keyFileVariable: 'SSH_KEY_FOR_GITHUB', \
                                              passphraseVariable: '', \
                                              usernameVariable: 'USER')]) {
-                        sh("git config core.sshCommand 'ssh -i ${SSH_KEY_FOR_GITHUB}'")
+                        sh("git config core.sshCommand 'ssh -i ${SSH_KEY_FOR_GITHUB} -o StrictHostKeyChecking=no'")
                         sh('git remote set-url origin git@github.com:cebernard22/alphatraining.git')
                         sh 'git add .'
                         sh 'git commit -m "jenkins ci: version bump"'                        
