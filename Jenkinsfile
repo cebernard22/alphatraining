@@ -37,11 +37,18 @@ pipeline {
          
 
 
-        stage('Test') { 
+
+        stage('Test') {             
             steps {
-                echo 'Testing product: TODO once build stage is completed...'  
+                script {                
+                    echo 'Installing package...'  
+                    pip install ".[test]" .
+                    echo 'Testing package...'                 
+                    pytest --cov-report term --cov=alphamonitor tests
+                }
             }
         }
+
 
 
 
