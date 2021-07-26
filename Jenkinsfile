@@ -45,6 +45,7 @@ pipeline {
                     pip install ".[test]" .
                     echo 'Testing package...'                 
                     pytest --cov-report term --cov=alphamonitor tests
+                    echo 'Testing stage completed'  
                 }
             }
         }
