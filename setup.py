@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="alphamonitor-cebernard22",
-    version="0.0.14",
+    version="0.0.15",
     author="Cedric Bernard",
     author_email="ce_bernard@yahoo.fr",
     description="Simple python package to interact with JIRA",
