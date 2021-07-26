@@ -42,7 +42,7 @@ pipeline {
             steps {
                 script {                
                     echo 'Installing package...'  
-                    sh " pip install ".[test]" ."
+                    sh " pip install .[test] ."
                     echo 'Testing package...'                 
                     sh 'pytest --cov-report term --cov=alphamonitor tests'                    
                 }
