@@ -1,1 +1,6 @@
-subnet_cidr_block = "172.31.48.0/24"
+vpc_cidr_block= "10.0.0.0/16"
+subnet_cidr_block = "10.0.10.0/24"
+env_prefix="dev"
+my_ip="TBC"
+avail_zone="eu-west-3a"
+public_key_location="TBC"
