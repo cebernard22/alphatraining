@@ -297,4 +297,17 @@ Check here for more details: <https://tomgregory.com/running-docker-in-docker-on
 
 ## 8.1. AWS
 
-In case aws services are needed, ensure your WSL instance has no date synchronisation issue, otherwise the credentials will fail : <https://forums.aws.amazon.com/thread.jspa?threadID=175266>
+* In case aws services are needed, ensure your WSL instance has no date synchronisation issue, otherwise the credentials will fail : <https://forums.aws.amazon.com/thread.jspa?threadID=175266>
+
+
+* In order to access properly by SSH to an EC2 instance, pem file locally stored in .ssh shall get right access rights: chmod 400 xxx.pem. Related command to use it : 
+  
+  ```bash
+  ssh -i ~/.ssh/server-key-pair.pem ec2-user@<EC2_IP>
+
+  ```
+
+
+server-key-pair.pem being created manually from AWS UI
+
+* A better practice is to use our own ssh id-rda files, and dynamically configure AWS by Terraform

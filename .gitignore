@@ -19,3 +19,4 @@ tests/__pycache__/test_alphamonitor.cpython-38-pytest-6.2.4.pyc
 dist
 terraform/.terraform/*
 terraform/*.tfstate*
+terraform/*cebernar*.tfvars
