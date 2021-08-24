@@ -15,6 +15,8 @@
     - [7.2.1. Jenkins Dynamic push into github](#721-jenkins-dynamic-push-into-github)
   - [7.3. Jenkins Slave](#73-jenkins-slave)
     - [7.3.1. Docker in Docker](#731-docker-in-docker)
+- [8. Terraform](#8-terraform)
+  - [8.1. AWS](#81-aws)
 
 <!-- /TOC -->
 
@@ -290,3 +292,9 @@ In case the slave needs to run docker CLI to build and/or push images to a docke
   ```
 
 Check here for more details: <https://tomgregory.com/running-docker-in-docker-on-windows/>
+
+# 8. Terraform
+
+## 8.1. AWS
+
+In case aws services are needed, ensure your WSL instance has no date synchronisation issue, otherwise the credentials will fail : <https://forums.aws.amazon.com/thread.jspa?threadID=175266>
