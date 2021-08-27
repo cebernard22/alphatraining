@@ -20,3 +20,6 @@ dist
 terraform/.terraform/*
 terraform/*.tfstate*
 terraform/*cebernar*.tfvars
+eks/.terraform.lock.hcl
+eks/terraform.tfstate*
+eks/.terraform/*
