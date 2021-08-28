@@ -17,6 +17,8 @@
     - [7.3.1. Docker in Docker](#731-docker-in-docker)
 - [8. Terraform](#8-terraform)
   - [8.1. AWS](#81-aws)
+- [9. Ansible](#9-ansible)
+  - [9.1. Installation](#91-installation)
 
 <!-- /TOC -->
 
@@ -311,3 +313,21 @@ Check here for more details: <https://tomgregory.com/running-docker-in-docker-on
 server-key-pair.pem being created manually from AWS UI
 
 * A better practice is to use our own ssh id-rda files, and dynamically configure AWS by Terraform
+
+
+# 9. Ansible
+
+## 9.1. Installation
+
+apt is not the best way to install ansible, since an old version will be installed. pip3 is a better way to proceed with :
+
+```bash
+  unset DISPLAY
+  pip3 install ansible
+  export PATH=$PATH:/usr/local/lib/python3.8/dist-packages
+
+  ```
+
+  export can/should also be set in .bashrc file
+
+ 
