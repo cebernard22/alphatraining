@@ -1,12 +1,14 @@
 ---
-- name: Configure docker
+- name: Configure docker being root user
   hosts: ec2
+  become : yes
   tasks:
   - name: install docker
     yum:    
         name: docker
         state: latest
-  - name: start docker
+        update_cache: yes
+  - name: Make sure docker is started
     service:
         name: docker
         state: started
@@ -14,3 +16,14 @@
     shell: |              
        group add docker
        usermod -aG docker ec2-user               
+  - name: Reconnect to server session so group is taken into account
+    ansible.builtin.meta: reset_connection
+
+
+- name: Make sure ec2-user can run docker commands
+  hosts: ec2
+  tasks:
+  - name: run docker ps command
+    command : docker ps
+    register: docker_result  
+  - ansible.builtin.debug: msg={{docker_result.stdout}}
