@@ -1,12 +1,29 @@
 ---
-- name: Configure docker
-  hosts: ec2
+- name: Wait for ssh connection
+  hosts: aws_ec2
+  gather_facts: False
+  tasks: 
+  - name: Ensure ssh port is  opened
+    ansible.builtin.wait_for:
+        port: 22
+        delay: 10
+        timeout: 100
+        search_regex: OpenSSH
+        host: '{{ (ansible_ssh_host|default(ansible_host))|default(inventory_hostname) }}'
+    vars:
+        ansible_connection: local
+        
+
+- name: Configure docker being root user
+  hosts: aws_ec2
+  become : yes
   tasks:
   - name: install docker
     yum:    
         name: docker
         state: latest
-  - name: start docker
+        update_cache: yes
+  - name: Make sure docker is started
     service:
         name: docker
         state: started
@@ -14,3 +31,14 @@
     shell: |              
        group add docker
        usermod -aG docker ec2-user               
+  - name: Reconnect to server session so group is taken into account
+    ansible.builtin.meta: reset_connection
+
+
+- name: Make sure ec2-user can run docker commands
+  hosts: aws_ec2
+  tasks:
+  - name: run docker ps command
+    command : docker ps
+    register: docker_result  
+  - ansible.builtin.debug: msg={{docker_result.stdout}}

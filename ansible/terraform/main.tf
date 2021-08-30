@@ -6,6 +6,7 @@ provider "aws" {region = "eu-west-3"}
 
 resource "aws_vpc" "myapp-vpc" {
     cidr_block = var.vpc_cidr_block
+    enable_dns_hostnames = true
     tags = {
         Name = "${var.env_prefix}-vpc"
     }
