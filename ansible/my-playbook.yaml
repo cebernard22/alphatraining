@@ -1,6 +1,21 @@
 ---
+- name: Wait for ssh connection
+  hosts: aws_ec2
+  gather_facts: False
+  tasks: 
+  - name: Ensure ssh port is  opened
+    ansible.builtin.wait_for:
+        port: 22
+        delay: 10
+        timeout: 100
+        search_regex: OpenSSH
+        host: '{{ (ansible_ssh_host|default(ansible_host))|default(inventory_hostname) }}'
+    vars:
+        ansible_connection: local
+        
+
 - name: Configure docker being root user
-  hosts: ec2
+  hosts: aws_ec2
   become : yes
   tasks:
   - name: install docker
@@ -21,7 +36,7 @@
 
 
 - name: Make sure ec2-user can run docker commands
-  hosts: ec2
+  hosts: aws_ec2
   tasks:
   - name: run docker ps command
     command : docker ps

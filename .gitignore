@@ -24,6 +24,7 @@ eks/.terraform.lock.hcl
 eks/terraform.tfstate*
 eks/.terraform/*
 eks/*cebernar*.tfvars
+eks/kubeconfig*
 ansible/terraform/.terraform/*
 ansible/terraform/*.tfstate*
 ansible/terraform/*cebernar*.tfvars

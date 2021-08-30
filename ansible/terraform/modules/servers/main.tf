@@ -78,3 +78,23 @@ resource "aws_instance" "myapp-server2" {
         Name = "${var.env_prefix}-server2"
     }
 }
+
+
+
+resource "aws_instance" "myapp-server3" {
+    ami = data.aws_ami.latest-amazon-linux-image.id
+    instance_type = "t2.micro"
+    subnet_id = var.subnet_id
+    vpc_security_group_ids = [aws_default_security_group.default-sg.id]
+    availability_zone = var.avail_zone
+    associate_public_ip_address = true
+    key_name = aws_key_pair.myapp-key-pair.key_name
+    user_data= file("entry-script.sh")
+
+
+
+
+    tags = {
+        Name = "${var.env_prefix}-server3"
+    }
+}
